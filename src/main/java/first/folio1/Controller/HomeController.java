@@ -1,7 +1,7 @@
 package first.folio1.Controller;
 
-import first.folio1.members.Login;
-import first.folio1.members.Member;
+import first.folio1.users.Login;
+import first.folio1.users.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSession;
         @PostMapping("/login")
         public String login(@ModelAttribute Login loginRequest, HttpSession session) {
             // 로그인 로직 처리
-            Member loginUser = member.login(loginRequest);
+            User loginUser = member.login(loginRequest);
             if (loginUser != null) {
                 session.setAttribute("loginUser", loginUser);
                 return "redirect:/";
@@ -37,18 +37,7 @@ import javax.servlet.http.HttpSession;
             }
         }
 
-        @GetMapping("/register")
-        public String register() {
-            // 회원가입 페이지 로직 처리
-            return "register";
-        }
 
-        @PostMapping("/register")
-        public String register(@ModelAttribute Member memberRequest) {
-            // 회원가입 로직 처리
-            Member member = member.register(memberRequest);
-            return "redirect:/login";
-        }
 
         @GetMapping("/logout")
         public String logout(HttpSession session) {
@@ -56,5 +45,16 @@ import javax.servlet.http.HttpSession;
             session.invalidate();
             return "redirect:/";
         }
+
+
+//
+//        try {
+//            Order order = orderService.getOrderById(orderId);
+//            // 주문 정보를 가져온 후에 처리할 로직 작성
+//        } catch (
+//        OrderNotFoundException e) {
+//            // 주문 정보가 없는 경우 예외 처리
+//            // 사용자에게 적절한 메시지 제공 등의 작업 수행
+//        }
     }
 

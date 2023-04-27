@@ -1,7 +1,10 @@
 package first.folio1.policy;
 
-public interface CartService {
+import first.folio1.etc.CartItem;
 
+import java.util.List;
+
+public interface CartService {
 
 
     //----------------------------------------------------------------
@@ -41,7 +44,7 @@ public interface CartService {
      *
      * @param userId 현재 로그인한 사용자 ID
      */
-    void clearCart();
+    void clearCart(Long cartId);
 
     /**
      * 장바구니에 담긴 모든 상품의 가격을 다 더한 값.
@@ -49,7 +52,6 @@ public interface CartService {
      * @param userId 현재 로그인한 사용자 ID
      */
     int getTotalPrice();
-
 }
 
 

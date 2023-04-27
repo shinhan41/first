@@ -1,7 +1,6 @@
-package first.folio1.members;
+package first.folio1.users;
 // 회원 정보를 담는 클래스
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +13,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member{
+public class User{
 
     @Id @GeneratedValue
     private Long id;
