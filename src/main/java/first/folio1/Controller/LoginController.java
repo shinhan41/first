@@ -1,7 +1,7 @@
 package first.folio1.Controller;
 
 import first.folio1.users.Login;
-import first.folio1.users.User;
+import first.folio1.dtoAndEntity.UserEntity;
 import first.folio1.policy.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,9 +19,9 @@ public class LoginController {
     @PostMapping("/login")
     public String login(@ModelAttribute Login loginRequest,HttpSession session) {
         // 로그인 로직 처리
-        User loginUser = member.login(loginRequest);
-        if (loginUser != null) {
-            session.setAttribute("loginUser", loginUser);
+        UserEntity loginUserEntity= member.login(loginRequest);
+        if (loginUserEntity!= null) {
+            session.setAttribute("loginUser",loginUserEntity);
             return "redirect:/";
         } else {
             return "login";

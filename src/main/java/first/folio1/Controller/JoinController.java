@@ -1,6 +1,6 @@
 package first.folio1.Controller;
 
-import first.folio1.users.User;
+import first.folio1.dtoAndEntity.UserEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,9 +16,9 @@ public class JoinController{
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute User userRequest) {
+    public String register(@ModelAttribute UserEntity userEntityRequest) {
         // 회원가입 로직 처리
-        User user= user.register(userRequest);
+        UserEntity userEntity= userEntity.register(userEntityRequest);
         return "redirect:/login";
     }
 
