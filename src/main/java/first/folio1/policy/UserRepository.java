@@ -4,6 +4,7 @@ package first.folio1.policy;
 
 import first.folio1.exceptions.UserNotFoundException;
 import first.folio1.dtoAndEntity.UserEntity;
+import org.apache.catalina.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +20,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     List<UserEntity> findAll();
 
     //유저 네임으로 조회
-    UserEntity findByUsername(String username) throws UserNotFoundException;
+    Optional<UserEntity> findByUsername(String username) throws UserNotFoundException;
 
     // 사용자 이메일로 멤버 조회
     Optional<UserEntity> findByEmail(String email)throws UserNotFoundException;
@@ -43,6 +44,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     //사용자의 총 수를 반환합니다.
     long count();
 
-
+    User save();
 }
 

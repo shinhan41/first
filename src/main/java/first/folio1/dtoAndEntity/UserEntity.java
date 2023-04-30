@@ -44,6 +44,9 @@ public class UserEntity{
         this.gender = gender;
     }
 
+
+
+
 // User 클래스들는 사용자가 입력한 이메일과 비밀번호를 저장하고,
 // UserRepository는 이를 조회할 수 있는 기능을 제공합니다.
 // Authentication 클래스는 사용자가 인증된 상태인지를 나타내는 정보를 담습니다.

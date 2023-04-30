@@ -25,17 +25,7 @@ import javax.servlet.http.HttpSession;
             return "login";
         }
 
-        @PostMapping("/login")
-        public String login(@ModelAttribute Login loginRequest, HttpSession session) {
-            // 로그인 로직 처리
-            UserEntity loginUserEntity= member.login(loginRequest);
-            if (loginUserEntity!= null) {
-                session.setAttribute("loginUser",loginUserEntity);
-                return "redirect:/";
-            } else {
-                return "login";
-            }
-        }
+
 
 
 
