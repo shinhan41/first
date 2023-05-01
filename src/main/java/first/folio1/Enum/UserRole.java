@@ -1,4 +1,4 @@
-package first.folio1.dtoAndEntity;
+package first.folio1.Enum;
 
 public enum UserRole{
     USER("ROLE_USER"),

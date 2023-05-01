@@ -1,9 +1,12 @@
 package first.folio1.users.security;
 
+import first.folio1.policy.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +15,12 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.Map;
 @Service
+@NoArgsConstructor
+@AllArgsConstructor
 public class JwtServiceImpl implements JwtService{
-    private final SecretKey secretKey;
-    private final long expirationMillis;
+
+    private  SecretKey secretKey;
+    private  long expirationMillis;
 
     public JwtServiceImpl(@Value("${jwt.secret}") String secret,
                           @Value("${jwt.expirationMillis}") long expirationMillis) {
@@ -22,8 +28,9 @@ public class JwtServiceImpl implements JwtService{
         this.expirationMillis = expirationMillis;
     }
 
+
     @Override
-    public String createToken(String subject, Map<String, Object> claims, long expirationMillis) {
+    public String createToken(String subject,Map<String,Object> claims,long expirationMillis){
         Instant now = Instant.now();
         Date issuedAt = Date.from(now);
         Date expiration = Date.from(now.plusMillis(expirationMillis));
@@ -35,6 +42,9 @@ public class JwtServiceImpl implements JwtService{
                 .signWith(secretKey)
                 .compact();
     }
+
+
+
 
     @Override
     public Claims parseToken(String token)  throws JwtException{
@@ -64,5 +74,7 @@ public class JwtServiceImpl implements JwtService{
 
         }
     }
+
+
 
 }

@@ -4,12 +4,15 @@ import first.folio1.dtoAndEntity.LoginResponseDTO;
 import first.folio1.dtoAndEntity.UserDto;
 import first.folio1.dtoAndEntity.UserEntity;
 import first.folio1.exceptions.UserNotFoundException;
+import first.folio1.policy.UserRepository;
+import first.folio1.policy.JwtService;
 import first.folio1.users.security.JwtServiceImpl;
-import first.folio1.users.LoginRequest;
+import first.folio1.dtoAndEntity.LoginRequest;
 import first.folio1.users.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -18,13 +21,17 @@ import javax.servlet.http.HttpSession;
 //@SessionAttributes("loginUser")
 @RequestMapping("/users")
 public class UserController{
+    private UserRepository userRepository;
+
     @GetMapping("/login")// 로그인 페이지 로드
     public String login() {
         return "login";
     }
 
-
-
+    @Autowired
+    private JwtService jwtService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
     //일반 로그인
     private UserServiceImpl userServiceImpl;
 
@@ -48,7 +55,20 @@ public class UserController{
     } catch (IllegalArgumentException e) {//로그인 실패
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
 //    로그아웃 처리 (현재 로그인한 사용자의 세션을 만료시킴)
         @PostMapping("/logout")
         public ResponseEntity<String> logout(HttpSession session) {

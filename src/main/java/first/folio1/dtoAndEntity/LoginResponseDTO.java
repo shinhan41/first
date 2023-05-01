@@ -8,6 +8,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginResponseDTO{
+
     private String accessToken;
     private UserDto userDto;
+
+    void getUsername(){
+
+    };
+    void getPassword(){
+
+    };
+
 }

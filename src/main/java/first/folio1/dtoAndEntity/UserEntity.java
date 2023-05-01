@@ -1,15 +1,21 @@
 package first.folio1.dtoAndEntity;
 // 회원 정보를 담는 클래스
 import first.folio1.Enum.Gender;
+
+import first.folio1.Enum.UserRole;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.User;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,16 +31,34 @@ public class UserEntity{
     private String phone; // 연락처 (선택)
     private String address; // 주소 (선택)
     private LocalDate birthday; // 생년월일 (선택)
-
-    private LocalDateTime createdAt; //Create 시점
-    private LocalDateTime updatedAt; //update 시점
-    private UserRole role;
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
     private Gender gender; // 성별 (선택)
-
+    private LocalDateTime createdAt; //Create 시점
+    private LocalDateTime updatedAt; //update 시점
+    private UserRole role; // 로그인 토큰(유저,어드민)
     public boolean matchPassword(String password){
         return false;
+    }
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<RoleEntity> roles = new ArrayList<>();
+    public UserDetails toUserDetails() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for (RoleEntity role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+        return new User(username, password, authorities);
+    }
+
+    public boolean isEnabled(){
+        //// 사용자 계정이 사용 가능한 상태인지 여부를 반환합니다. -이 기능 안쓸듯.
+        return true;
     }
 }
 
