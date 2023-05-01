@@ -30,6 +30,9 @@ public UserEntity Join(UserEntity user) throws DuplicateUsernameException {
     return (UserEntity) userRepository.save();
 }
 
+
+
+
 // ===================== 로그인 기능*****
 public UserEntity login(String username, String password) throws UserNotFoundException {
     Optional<UserEntity> userEntityOpt = userRepository.findByUsername(username);
@@ -42,6 +45,8 @@ public UserEntity login(String username, String password) throws UserNotFoundExc
     }
     return userEntity;
 }
+
+
     //================================log out
     public void logout(HttpSession session) {
         session.removeAttribute("loginUser");

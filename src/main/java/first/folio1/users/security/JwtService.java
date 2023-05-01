@@ -1,4 +1,4 @@
-package first.folio1.security;
+package first.folio1.users.security;
 
 import io.jsonwebtoken.Claims;
 

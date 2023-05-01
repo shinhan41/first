@@ -28,12 +28,15 @@ public class UserEntity{
 
     private LocalDateTime createdAt; //Create 시점
     private LocalDateTime updatedAt; //update 시점
-
+    private UserRole role;
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
     private Gender gender; // 성별 (선택)
 
+    public boolean matchPassword(String password){
+        return false;
     }
+}
 
 
 
@@ -44,4 +47,3 @@ public class UserEntity{
 // LoginService는 사용자가 입력한 정보와 MemberRepository에서 조회한 정보를 비교하여 인증을 처리하고,
 // 인증 성공 시 Authentication 객체를 생성합니다.
 // LogoutService는 Authentication 객체를 삭제하여 로그아웃을 처리합니다.
-}

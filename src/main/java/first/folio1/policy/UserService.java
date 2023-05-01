@@ -13,8 +13,10 @@ import java.util.List;
 // 즉, 사용자가 요청한 작업을 처리하기 위한 비즈니스 로직을 구현합니다.
 // 새로운 사용자 생성, 사용자 정보 조회, 사용자 정보 업데이트, 사용자 정보 삭제
 public interface UserService extends CrudRepository{
-    UserEntity login(String username, String password) throws UserNotFoundException;
+    UserEntity login(String username, String password)
+            throws UserNotFoundException;
 }
+
 //    save(S entity) : 주어진 엔티티를 저장하고, 저장된 엔티티를 반환합니다.
 //            saveAll(Iterable<S> entities) : 주어진 엔티티들을 저장하고, 저장된 엔티티들을 반환합니다.
 //            findById(ID id) : 주어진 ID에 해당하는 엔티티를 반환합니다. 존재하지 않는 경우 Optional.empty()를 반환합니다.
@@ -63,4 +65,5 @@ public interface UserService extends CrudRepository{
     //for Test DTO에서.회원가입,조회 메서드 (이건 어드민에서 쓰거나 테스트에서 메서드)
     //새로운 사용자를 추가하고, 추가된 사용자를 반환합니다. 이미 동일한 ID를 가진 사용자가 존재하는 경우 UserExistException이 발생합니다.
 //    void userJoin(UserDto userDto) throws UserExistException;
-}
+
+

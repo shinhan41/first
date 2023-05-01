@@ -1,10 +1,9 @@
 package first.folio1.dtoAndEntity;
 import first.folio1.Enum.Gender;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import java.time.LocalDate;
@@ -12,7 +11,10 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class UserDto {
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class UserDto{
 
     private Long id;
     private String email; // 아이디
@@ -25,21 +27,22 @@ public class UserDto {
     private LocalDateTime updatedAt;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "gender")
+    @Column(name="gender")
+
     private Gender gender; // 성별 (선택)
 
 
+    public static UserDto fromEntity(UserEntity userEntity) {
+        UserDto userDto = new UserDto();
 
-    @Builder
-    public UserDto(String username,String password,String email,String name,
-                      LocalDate birthday,Gender gender) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.username = name;
-        this.birthday = birthday;
-        this.gender = gender;
+        userDto.setEmail(userEntity.getEmail());
+        userDto.setPassword(userEntity.getPassword());
+        // 추가적으로 필요한 필드들가 있을까
+        return userDto;
     }
+
+
+
 
 
 }

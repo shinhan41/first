@@ -10,12 +10,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-//CRUD (Create, Read, Update, Delete)
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
     long count();
-
     User save();
 
     //모든 사용자를 반환합니다.

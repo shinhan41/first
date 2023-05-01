@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpSession;
     @Controller
     public class HomeController {
-        Login member;
 
         @GetMapping("/")
         public String home(Model model) {
@@ -15,18 +14,7 @@ import javax.servlet.http.HttpSession;
             return "index";
         }
 
-        @GetMapping("/login")
-        public String login() {
-            // 로그인 페이지 로직 처리
-            return "login";
-        }
 
-        @GetMapping("/logout")
-        public String logout(HttpSession session) {
-            // 로그아웃 로직 처리
-            session.invalidate();
-            return "redirect:/";
-        }
 
 
 //
