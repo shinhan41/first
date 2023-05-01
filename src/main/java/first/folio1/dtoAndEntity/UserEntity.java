@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.catalina.User;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,7 +15,6 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class UserEntity{
     @Id @GeneratedValue
     private Long id;
@@ -33,15 +33,6 @@ public class UserEntity{
     @Column(name = "gender")
     private Gender gender; // 성별 (선택)
 
-    @Builder
-    public UserEntity(String username,String password,String email,String name,
-                      LocalDate birthday,Gender gender) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.username = name;
-        this.birthday = birthday;
-        this.gender = gender;
     }
 
 

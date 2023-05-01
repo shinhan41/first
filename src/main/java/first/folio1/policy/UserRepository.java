@@ -14,7 +14,9 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
+    long count();
 
+    User save();
 
     //모든 사용자를 반환합니다.
     List<UserEntity> findAll();
@@ -32,18 +34,15 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     List<UserEntity> findByNameOrEmailOrderByNameAsc(String name,String email)throws UserNotFoundException;
 
 
-
     // 주어진 ID에 해당하는 사용자가 존재하는지 확인
     boolean existsById(Long userId);
     // 주어진 ID에 해당하는 사용자가 존재하는지 확인
-    boolean existsByUsername(Long userName);
+    boolean existsByUsername(String userName);
 
     //주어진 ID에 해당하는 사용자를 삭제합니다.
     void deleteById(Long userId);
     void deleteByName(String userName);
     //사용자의 총 수를 반환합니다.
-    long count();
 
-    User save();
 }
 

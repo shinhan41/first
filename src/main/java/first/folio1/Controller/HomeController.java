@@ -1,12 +1,8 @@
 package first.folio1.Controller;
 
-import first.folio1.users.Login;
-import first.folio1.dtoAndEntity.UserEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
     @Controller
@@ -24,10 +20,6 @@ import javax.servlet.http.HttpSession;
             // 로그인 페이지 로직 처리
             return "login";
         }
-
-
-
-
 
         @GetMapping("/logout")
         public String logout(HttpSession session) {
