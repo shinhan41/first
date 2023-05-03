@@ -1,7 +1,7 @@
 package first.folio1.Controller;
 
 import first.folio1.dtoAndEntity.LoginResponseDTO;
-import first.folio1.dtoAndEntity.UserDto;
+import first.folio1.dtoAndEntity.UserDto2;
 import first.folio1.dtoAndEntity.LoginRequest;
 import first.folio1.users.security.JwtServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +49,7 @@ public class AuthController {
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
         String token = jwtServiceImpl.createToken(userDetails.getUsername(), new HashMap<>(), expirationMillis);
 
-        UserDto userDto = new UserDto();
+        UserDto2 userDto = new UserDto2();
         userDto.setUsername(userDetails.getUsername());
         userDto.setAuthorities((List<? extends GrantedAuthority>)userDetails.getAuthorities());
 

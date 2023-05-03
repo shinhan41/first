@@ -1,62 +1,44 @@
 package first.folio1.dtoAndEntity;
-import first.folio1.Enum.Gender;
-import first.folio1.Enum.UserRole;
-import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import first.folio1.Enum.Gender;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class UserDto{
-
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique=true)
     private String email; // 아이디
+
     private String password; // 비밀번호
     private String username; // 이름
     private String phone; // 연락처 (선택)
     private String address; // 주소 (선택)
     private LocalDate birthday; // 생년월일 (선택)
     @Enumerated(EnumType.STRING)
-    @Column(name="gender")
-    private Gender gender; // 성별 (선택)
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private UserRole role; // 로그인 토큰(유저,어드민)
+    @Column(name = "gender")
+    private Gender gender;
 
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")}
+    )
+    private List<RoleEntity> roles = new ArrayList<>();
 
     public boolean matchPassword(String password){
-        return false;
+        return this.password.equals(password);
     }
-
-    private List<? extends GrantedAuthority> authorities; // 어드민 권한 부여 받은 객체들 리스트
-
-
-    public static UserDto fromEntity(UserEntity userEntity) {
-        UserDto userDto = new UserDto();
-
-        userDto.setEmail(userEntity.getEmail());
-        userDto.setPassword(userEntity.getPassword());
-        // 추가적으로 필요한 필드들가 있을까
-
-        UserDetails userDetails = userEntity.toUserDetails();
-        userDto.setAuthorities((List<? extends GrantedAuthority>)userDetails.getAuthorities());
-        userDto.setUsername(userDetails.getUsername());
-
-        return userDto;
-    }
-
-
-
-
 
 }

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class LoginResponseDTO{
 
     private String accessToken;
-    private UserDto userDto;
+    private UserDto2 userDto;
 
     void getUsername(){
 

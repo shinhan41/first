@@ -1,7 +1,7 @@
 package first.folio1.Controller;
 
 import first.folio1.dtoAndEntity.LoginResponseDTO;
-import first.folio1.dtoAndEntity.UserDto;
+import first.folio1.dtoAndEntity.UserDto2;
 import first.folio1.dtoAndEntity.UserEntity;
 import first.folio1.exceptions.UserNotFoundException;
 import first.folio1.policy.UserRepository;
@@ -45,10 +45,10 @@ public class UserController{
     }
     //일반 로그인처리
     @PostMapping("/login")
-    public ResponseEntity<UserDto> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<UserDto2> login(@RequestBody LoginRequest request) {
     try {
         UserEntity userEntity = userServiceImpl.login(request.getUsername(), request.getPassword());
-        UserDto userDto = UserDto.fromEntity(userEntity);
+        UserDto2 userDto = UserDto2.fromEntity(userEntity);
         return ResponseEntity.ok(userDto);
     } catch (UserNotFoundException e) {//로그인 성공
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

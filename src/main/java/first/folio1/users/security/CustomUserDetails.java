@@ -3,13 +3,12 @@ package first.folio1.users.security;
 import first.folio1.Enum.UserRole;
 import first.folio1.dtoAndEntity.RoleEntity;
 import first.folio1.dtoAndEntity.UserEntity;
-import first.folio1.dtoAndEntity.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.Group;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
@@ -19,23 +18,23 @@ import java.util.List;
 @AllArgsConstructor
 public class CustomUserDetails implements UserDetails  {
 
-    private UserEntity user;
+    private UserEntity userEntity;
     private UserRole role;
-
+    private User user;
     public CustomUserDetails(UserEntity user) {
-        this.user = user;
+        this.userEntity = user;
     }
     @Override
     public String getUsername() {
         // 사용자의 아이디를 반환합니다.
-        return user.getUsername();
+        return userEntity.getUsername();
     }
 
 
     @Override
     public String getPassword() {
         // 사용자의 비밀번호를 반환합니다.
-        return user.getPassword();
+        return userEntity.getPassword();
     }
 
 
@@ -43,7 +42,7 @@ public class CustomUserDetails implements UserDetails  {
     public List<? extends GrantedAuthority> getAuthorities() {
         // 사용자의 권한 정보를 반환합니다.
         List<GrantedAuthority> authorities = new ArrayList<>();
-        for (RoleEntity role : user.getRoles()) {
+        for (RoleEntity role : userEntity.getRoles()) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
         return authorities;

@@ -1,13 +1,8 @@
 package first.folio1.policy;
 
-import first.folio1.dtoAndEntity.UserDto;
-import first.folio1.exceptions.DuplicateUsernameException;
 import first.folio1.dtoAndEntity.UserEntity;
-import first.folio1.exceptions.UserAlreadyExistsException;
 import first.folio1.exceptions.UserNotFoundException;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.List;
 
 //비즈니스 로직을 처리하는 인터페이스입니다.
 // 즉, 사용자가 요청한 작업을 처리하기 위한 비즈니스 로직을 구현합니다.
