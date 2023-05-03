@@ -1,5 +1,6 @@
-package first.folio1.dtoAndEntity;
+package first.folio1.dtoAndEntity.auth;
 
+import first.folio1.dtoAndEntity.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,13 +11,13 @@ import lombok.NoArgsConstructor;
 public class LoginResponseDTO{
 
     private String accessToken;
-    private UserDto2 userDto;
+    private UserDto userDto;
 
-    void getUsername(){
-
-    };
-    void getPassword(){
-
-    };
+//    void getUsername(){
+//
+//    };
+//    void getPassword(){
+//
+//    };
 
 }

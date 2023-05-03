@@ -1,4 +1,4 @@
-package first.folio1.dtoAndEntity;
+package first.folio1.dtoAndEntity.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,13 +11,4 @@ public class LoginRequest{
 
         private String username;
         private String password;
-
-        public String getUsername(){
-                return username;
-        }
-        public String getPassword(){
-                return username;
-        }
-
-
 }

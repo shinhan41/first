@@ -1,9 +1,11 @@
 package first.folio1.Controller;
 
-import first.folio1.dtoAndEntity.LoginResponseDTO;
-import first.folio1.dtoAndEntity.UserDto2;
-import first.folio1.dtoAndEntity.LoginRequest;
+import first.folio1.dtoAndEntity.*;
+import first.folio1.dtoAndEntity.auth.LoginRequest;
+import first.folio1.dtoAndEntity.auth.LoginResponseDTO;
+import first.folio1.dtoAndEntity.UserDto;
 import first.folio1.users.security.JwtServiceImpl;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +35,9 @@ public class AuthController {
     private UserDetailsService userDetailsService;
     private  SecretKey secretKey;
     private  long expirationMillis;
+    ModelMapper modelMapper = new ModelMapper();
 
+    UserDto userDto = modelMapper.map(UserEntity.class, UserDto.class);
 
 
     @PostMapping("/login")
@@ -49,8 +53,9 @@ public class AuthController {
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
         String token = jwtServiceImpl.createToken(userDetails.getUsername(), new HashMap<>(), expirationMillis);
 
-        UserDto2 userDto = new UserDto2();
+        UserDto userDto = new UserDto();
         userDto.setUsername(userDetails.getUsername());
+
         userDto.setAuthorities((List<? extends GrantedAuthority>)userDetails.getAuthorities());
 
         LoginResponseDTO response = new LoginResponseDTO();

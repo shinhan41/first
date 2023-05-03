@@ -1,12 +1,12 @@
 package first.folio1.Enum;
 
-public enum UserRole{
+public enum AuthRole{
     USER("ROLE_USER"),
     ADMIN("ROLE_ADMIN");
 
     private final String authority;
 
-    UserRole(String authority) {
+    AuthRole(String authority) {
         this.authority = authority;
     }
 

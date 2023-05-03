@@ -1,6 +1,5 @@
 package first.folio1.users.security;
 
-import first.folio1.Enum.UserRole;
 import first.folio1.dtoAndEntity.UserEntity;
 import first.folio1.policy.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

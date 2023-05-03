@@ -1,18 +1,17 @@
-package first.folio1.dtoAndEntity;
+package first.folio1.dtoAndEntity.role;
 
+import first.folio1.Enum.AuthRole;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
 public class RoleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +20,6 @@ public class RoleEntity {
     @Column(unique = true, nullable = false)
     private String name; // 역할 이름 (예: ROLE_USER, ROLE_ADMIN)
 
-    @ManyToMany(mappedBy = "roles")
-    private List<UserEntity> users = new ArrayList<>();
+    @OneToMany(mappedBy = "role")
+    private List<UserRole> userRoles = new ArrayList<>();
 }
